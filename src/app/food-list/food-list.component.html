@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" *ngFor="let food of foods">
+            <h5>
+                {{food.name}}
+                <span class="badge text-bg-success"> {{food.price}} Ft</span>
+            </h5>
+            <div class="row">
+                <div class="col-md-2">
+                    <button class="btn btn-sm btn-outline-primary" (click)="navigateToProductForm(food.id)" >Edit</button>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-sm btn-outline-danger" 
+                    (click)="deleteProduct(food)">Delete</button>
+            </div>
+            <div class="col-md-9">
+                {{ food.desc | slice:0:240 }}
+            </div>
+        </div>
+    </div>
+</div>

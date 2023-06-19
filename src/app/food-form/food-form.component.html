@@ -1,0 +1,24 @@
+<div class="container">
+    <h1>Add new meal</h1>
+    <div class="col-md-6">
+      <form [formGroup]="foodForm">
+        <div class="mb-3">
+          <label for="firstname">Name</label>
+          <input type="text" class="form-control" id="name" name="name" formControlName="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="lastname">Description</label>
+          <input type="text" class="form-control" id="desc" name="desc" formControlName="desc" required>
+        </div>
+        <div class="mb-3">
+          <label for="email">Preparation time</label>
+          <input type="number" class="form-control" id="preptime" name="preptime" formControlName="preptime" required>
+        </div>
+        <div class="mb-3">
+          <label for="address">Price</label>
+          <input type="text" class="form-control" id="price" name="price" formControlName="price" required>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="saveFood()">Save</button>
+      </form>
+    </div>
+  </div>
