@@ -1,51 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AppComponent } from '../app.component';
+import { LoginDTO } from 'models';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-
-  //user: User | undefined;
-
-  errorMessage!: string;
-
-  loginForm: FormGroup = this.formBuilder.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required]
+export class LoginComponent {
+  loginForm = this.formBuilder.group({
+    email: this.formBuilder.control('',[Validators.required, Validators.email]),
+    password: this.formBuilder.control('',[Validators.required])
   });
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
     private authService: AuthService,
-    private appComponent: AppComponent,
-    private router: Router) { }
+    private router: Router,
+    private toastrService: ToastrService) { }
 
-  ngOnInit(): void {
+    get fc() {
+      return this.loginForm.controls;
+    }
+
+  login() {
+    const loginData = this.loginForm.value as LoginDTO;
+
+
+    this.userService.login(loginData).subscribe({
+      next: (response) => {
+        this.authService.setToken(response.accessToken);
+        this.router.navigateByUrl('/');
+      },
+      error: (err) => {
+        this.toastrService.error(err.error.error, 'Error');
+      }
+    });
   }
-
-  // get f(): { [key: string]: AbstractControl } {
-  //   return this.loginForm.controls;
-  // }
-
-  // async login() {
-  //   const user = await this.authService.authenticateUser(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value);
-  //   console.log(user.role);
-  //   if (user.role === 1) {
-  //     this.appComponent.isLoggedIn = true;
-  //     this.appComponent.isAdmin = true;
-  //   }
-  //   else if (user.role === 2) {
-  //     this.appComponent.isLoggedIn = true;
-  //     this.appComponent.isAdmin = false;
-  //   }
-
-  //   if (this.appComponent.isLoggedIn) {
-  //     this.router.navigateByUrl('/patient-list');
-  //   }
-  // }
 }

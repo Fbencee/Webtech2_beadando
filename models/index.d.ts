@@ -8,6 +8,15 @@ export interface FoodDTO {
 
 export interface UserDTO{
     id: number;
-    username: string;
+    email: string;
     password: string;
+}
+
+export interface LoginDTO {
+    email: string;
+    password: string;
+}
+
+export interface AccessTokenDTO {
+    accessToken: string;
 }

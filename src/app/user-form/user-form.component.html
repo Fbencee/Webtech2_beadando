@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>Add new meal</h1>
+    <div class="col-md-6">
+      <form [formGroup]="userForm">
+        <div class="mb-3">
+          <label for="firstname">Email</label>
+          <input type="email" class="form-control" id="email" name="email" formControlName="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="lastname">Password</label>
+          <input type="password" class="form-control" id="password" name="password" formControlName="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="saveUser()">Save</button>
+      </form>
+    </div>
+  </div>

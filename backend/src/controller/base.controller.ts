@@ -27,7 +27,7 @@ export abstract class Controller {
     delete = async (req, res) => {
         try {
             const id = req.params.id;
-            const entity = await this.repository.findOne(id);
+            const entity = await this.repository.findOne({where:{id:id}});
 
             if (!entity) {
                 return res.status(404).json({ message: 'Not existing entity.' });
@@ -43,7 +43,7 @@ export abstract class Controller {
     getOne = async (req, res) => {
         try {
             const id = req.params.id;
-            const entity = await this.repository.findOne(id);
+            const entity = await this.repository.findOne({where:{id:id}});
 
             if (!entity) {
                 return res.status(404).json({ message: 'Entity not found.' });
@@ -58,13 +58,23 @@ export abstract class Controller {
     update = async (req, res) => {
         try {
             const entity = this.repository.create(req.body as object);
-            const entityToUpdate = await this.repository.findOneBy({ id: entity.id });
+            const id = req.params.id;
+            const entityToUpdate = await this.repository.findOne({where:{id:id}});
 
             const result = await this.repository.save(entity);
             res.json(result);
         } catch (err) {
             res.status(500).json({ message: err.message });
         }
+
     }
 
+    handleError(res, err = null, status = 500, message = 'Unexpected server error') {
+        if (err) {
+            console.error(err);
+        }
+
+        res.status(status);
+        res.json({ error: message });
+    }
 }

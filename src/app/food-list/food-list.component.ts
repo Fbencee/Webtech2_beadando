@@ -3,6 +3,7 @@ import { FoodService } from '../services/food.service';
 import { FoodDTO } from 'models';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class FoodListComponent implements OnInit {
   constructor(
     private foodService: FoodService,
     private toastrSevice: ToastrService,
-    private router :Router) { }
+    private router :Router,
+    public authService: AuthService,) { }
 
  ngOnInit(): void {
   this.foodService.getAll().subscribe({

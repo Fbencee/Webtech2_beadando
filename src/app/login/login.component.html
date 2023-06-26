@@ -1,27 +1,51 @@
-<div class="d-flex center">
-    <div id="formContent" class="center">
-        <div>
-            <h2 class="mt-2 text-center">Orvosi törzsadat kezelés</h2>
+<!-- <div class="container">
+  <div clas="details">
+      <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div class="input-container">
+          <label>Email</label>
+          <div>
+            <input type="email" placeholder="Email" formControlName="email"/>
+          </div>
+          <div class="error-list" *ngIf="fc['email'].errors && isSubmitted">
+            <div *ngIf="fc['email'].errors['required']">Should not be empty</div>
+            <div *ngIf="fc['email'].errors['email']">Email is not correct</div>
+          </div>
         </div>
-        <!-- <form [formGroup]="loginForm" class="dynamic">
+        <div class="input-container">
+          <label>Password</label>
+          <div>
+            <input type="password" placeholder="Password" formControlName="password"/>
+          </div>
+          <div class="error-list" *ngIf="fc['password'].errors && isSubmitted">
+            <div *ngIf="fc['password'].errors['required']">Should not be empty</div>
+          </div>
+        </div>
+        <div class="button">
+          <button type="submit">Login</button>
+        </div>
+      </form>
+  </div>
+</div> -->
+
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        <form [formGroup]="loginForm">
             <div class="mb-3">
-                <label>Felhasználónév:</label>
-                <input type="text" class="form-control" formControlName="username">
-                <div class="text-danger" *ngIf="f['username']?.invalid">
-                    <small *ngIf="f['username']?.errors?.['required']">A felhasználónév mező kitöltése kötelező!</small>
-                </div>
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" formControlName="email">
+                <div class="error-list" *ngIf="fc['email'].errors">
+                    <div *ngIf="fc['email'].errors['required']">Should not be empty</div>
+                    <div *ngIf="fc['email'].errors['email']">Email is not correct</div>
+                  </div>
             </div>
-            <div class=" mb-3">
-                <label>Jelszó:</label>
-                <input type="password" class="form-control" formControlName="password">
-                <div class="text-danger" *ngIf="f['password']?.invalid">
-                    <small *ngIf="f['password']?.errors?.['required']">A jelszó mező kitöltése kötelező!</small>
-                </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" formControlName="password">
             </div>
-            <button type="button" class="btn btn-secondary form-control" (click)="login()"
-                [disabled]="loginForm?.invalid">
-                Bejelentkezés
-            </button>
-        </form> -->
+            
+            <div class="text-center">
+                <button class="btn btn-outline-primary" (click)="login()">Login</button>
+            </div>
+        </form>
     </div>
-</div>
+  </div>
