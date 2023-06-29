@@ -34,13 +34,16 @@
                 <label for="email" class="form-label">E-mail</label>
                 <input type="email" class="form-control" id="email" formControlName="email">
                 <div class="error-list" *ngIf="fc['email'].errors">
-                    <div *ngIf="fc['email'].errors['required']">Should not be empty</div>
-                    <div *ngIf="fc['email'].errors['email']">Email is not correct</div>
-                  </div>
+                    <div *ngIf="fc['email'].errors['required']" class="text-danger" >Should not be empty</div>
+                    <div *ngIf="fc['email'].errors['email']" class="text-danger" >Email is not correct</div>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" formControlName="password">
+                <div class="error-list" *ngIf="fc['password'].errors">
+                  <div *ngIf="fc['password'].errors['required']" class="text-danger" >Should not be empty</div>
+                </div>
             </div>
             
             <div class="text-center">

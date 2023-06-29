@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { FoodService } from '../services/food.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
@@ -17,10 +17,10 @@ export class FoodFormComponent {
 
   foodForm = this.formBuilder.group({
     id: this.formBuilder.control(0),
-    name: this.formBuilder.control(''),
-    desc: this.formBuilder.control(''),
-    preptime: this.formBuilder.control(0),
-    price: this.formBuilder.control(0)
+    name: this.formBuilder.control('',[Validators.required]),
+    desc: this.formBuilder.control('',[Validators.required]),
+    preptime: this.formBuilder.control(0,[Validators.required,Validators.pattern("^[0-9]*$")]),
+    price: this.formBuilder.control(0,[Validators.required,Validators.pattern("^[0-9]*$")])
   });
 
   constructor(
@@ -28,6 +28,10 @@ export class FoodFormComponent {
     private foodService: FoodService,
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute) { }
+
+  get fc() {
+    return this.foodForm.controls;
+  }
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id'];

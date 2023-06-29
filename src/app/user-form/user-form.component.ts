@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UserDTO } from 'models';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
@@ -17,8 +17,8 @@ export class UserFormComponent {
 
   userForm = this.formBuilder.group({
     id: this.formBuilder.control(0),
-    email: this.formBuilder.control(''),
-    password: this.formBuilder.control('')
+    email: this.formBuilder.control('',[Validators.required, Validators.email]),
+    password: this.formBuilder.control('',[Validators.required])
   });
 
   constructor(
@@ -26,6 +26,11 @@ export class UserFormComponent {
     private userService: UserService,
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute) { }
+
+    get fc() {
+      return this.userForm.controls;
+    }
+
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id'];

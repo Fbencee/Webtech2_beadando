@@ -11,12 +11,20 @@
           <input type="text" class="form-control" id="desc" name="desc" formControlName="desc" required>
         </div>
         <div class="mb-3">
-          <label for="email">Preparation time</label>
+          <label for="preptime">Preparation time</label>
           <input type="number" class="form-control" id="preptime" name="preptime" formControlName="preptime" required>
+          <div class="error-list" *ngIf="fc['preptime'].errors">
+            <div *ngIf="fc['preptime'].errors['required']" class="text-danger" >Should not be empty</div>
+            <div *ngIf="fc['preptime'].errors['pattern']" class="text-danger" >It must be a number</div>
+          </div>
         </div>
         <div class="mb-3">
-          <label for="address">Price</label>
+          <label for="price">Price</label>
           <input type="text" class="form-control" id="price" name="price" formControlName="price" required>
+          <div class="error-list" *ngIf="fc['price'].errors">
+            <div *ngIf="fc['price'].errors['required']" class="text-danger" >Should not be empty</div>
+            <div *ngIf="fc['price'].errors['pattern']" class="text-danger" >It must be a number</div>
+          </div>
         </div>
         <button type="submit" class="btn btn-primary" (click)="saveFood()">Save</button>
       </form>

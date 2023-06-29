@@ -4,12 +4,13 @@ import { FoodListComponent } from './food-list/food-list.component';
 import { FoodFormComponent } from './food-form/food-form.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
+import { UserFormComponent } from './user-form/user-form.component';
 
 const routes: Routes = [
   { path: 'food-list', component: FoodListComponent },
   { path: 'food-form', component: FoodFormComponent, canActivate: [ () => inject(AuthService).preventGuestAccess() ] },
   { path: 'food-form/:id',component: FoodFormComponent, canActivate: [ () => inject(AuthService).preventGuestAccess() ] } ,
-  { path: 'user-form', component: FoodFormComponent },
+  { path: 'user-form', component: UserFormComponent },
   { path: 'login', component: LoginComponent}
 ];
 
